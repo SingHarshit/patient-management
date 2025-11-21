@@ -17,8 +17,11 @@ public class kafkaConsumer {
     public void consumeEvent(byte[] event) {
         try {
             PatientEvent patientEvent = PatientEvent.parseFrom(event);
-            log.info("Received Patient Event {}", patientEvent.getPatientId(),
-                    patientEvent.getName(),patientEvent.getEmail());
+            log.info("Received Patient Event: id={}, name={}, email={}",
+                    patientEvent.getPatientId(),
+                    patientEvent.getName(),
+                    patientEvent.getEmail());
+
         } catch (InvalidProtocolBufferException e) {
             log.error("Error desearlizing {}",e.getMessage());
         }
