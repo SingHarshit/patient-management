@@ -5,15 +5,13 @@ CREATE TABLE IF NOT EXISTS users (
                                      role VARCHAR(50) NOT NULL
 );
 
--- Insert user only if id or email doesn't already exist
+-- Insert user only if email doesn't exist
 INSERT INTO users (id, email, password, role)
 SELECT '223e4567-e89b-12d3-a456-426614174006',
        'testuser@test.com',
-       '$2b$12$7hoRZfJrRKD2nIm2vHLs7OBETy.LWenXXMLKf99W8M4PUwO6KB7fu',
+       '$2a$12$6dwsAJZKjmi9X2MnC2w1Y.NL8WCuzJtrQcKz40vQWdYQZA9dZEg7S',
        'ADMIN'
-FROM DUAL
 WHERE NOT EXISTS (
     SELECT 1 FROM users
-    WHERE id = '223e4567-e89b-12d3-a456-426614174006'
-       OR email = 'testuser@test.com'
+    WHERE email = 'testuser@test.com'
 );

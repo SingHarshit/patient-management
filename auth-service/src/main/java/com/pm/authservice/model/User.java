@@ -1,18 +1,17 @@
 package com.pm.authservice.model;
 
-
 import jakarta.persistence.*;
-
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
 
-    @Column(unique = true,nullable = false)
+    @Id
+    @Column(columnDefinition = "CHAR(36)")
+    private String id;
+
+    @Column(unique = true, nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -21,21 +20,19 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-
-    public String getRole() {
-        return role;
+    @PrePersist
+    public void prePersist() {
+        if (id == null) {
+            id = UUID.randomUUID().toString();
+        }
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public String getId() {
+        return id;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -46,11 +43,19 @@ public class User {
         this.email = email;
     }
 
-    public UUID getId() {
-        return id;
+    public String getPassword() {
+        return password;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
