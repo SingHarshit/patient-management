@@ -26,7 +26,7 @@ A microservice responsible for managing patient records and publishing **event-d
 
 ### 🧱 Tech Used
 
-* Java 17
+* Java 21
 * Spring Boot
 * MySQL
 * Kafka (KRaft mode)
